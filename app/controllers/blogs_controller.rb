@@ -15,7 +15,9 @@ class BlogsController < ApplicationController
     @blog = Blog.new
   end
 
-  def edit; end
+  def edit
+   current_user.blogs.find(params[:id])
+  end
 
   def create
     @blog = current_user.blogs.new(blog_params)
@@ -28,6 +30,7 @@ class BlogsController < ApplicationController
   end
 
   def update
+    @blog = current_user.blogs.find(params[:id])
     if @blog.update(blog_params)
       redirect_to blog_url(@blog), notice: 'Blog was successfully updated.'
     else
