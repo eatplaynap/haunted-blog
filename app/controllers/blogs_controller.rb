@@ -9,9 +9,7 @@ class BlogsController < ApplicationController
     @blogs = Blog.search(params[:term]).published.default_order
   end
 
-  def show
-    raise ActiveRecord::RecordNotFound if @blog.secret? && @blog.user != current_user
-  end
+  def show; end
 
   def new
     @blog = Blog.new
@@ -51,6 +49,7 @@ class BlogsController < ApplicationController
 
   def set_blog
     @blog = Blog.find(params[:id])
+    raise ActiveRecord::RecordNotFound if @blog.secret? && @blog.user != current_user
   end
 
   def blog_params
