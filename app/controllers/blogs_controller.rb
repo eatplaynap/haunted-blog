@@ -16,7 +16,7 @@ class BlogsController < ApplicationController
   end
 
   def edit
-   current_user.blogs.find(params[:id])
+    current_user.blogs.find(params[:id])
   end
 
   def create
